@@ -255,7 +255,7 @@ function initScreen() {
   // fill('rgba(250,250,250,0.7)');
   textAlign(CENTER);
   image(hand.img, W / 2 - 100, H / 2 - 100, 200, 200);
-  fill(0);
+  fill("#005BBB");
   textSize(W / 15);
   textFont(gameFont);
   text("How fast can you punch", W / 2, H / 2 - 200);
@@ -368,28 +368,28 @@ function draw() {
     } else if (speedFloat > 40) {
       slapsfx4.play();
       score.style.fontSize = "70px";
-      score.style.color = "#30AFFF";
+      score.style.color = "#005BBB";
     } else if (speedFloat > 30) {
       slapsfx3.play();
       score.style.fontSize = "60px";
-      score.style.color = "#30AFFF";
+      score.style.color = "#005BBB";
     } else if (speedFloat > 20) {
       slapsfx2.play();
       score.style.fontSize = "50px";
-      score.style.color = "#30AFFF";
+      score.style.color = "#005BBB";
     } else if (speedFloat > 10) {
       slapsfx2.play();
       score.style.fontSize = "40px";
-      score.style.color = "#30AFFF";
+      score.style.color = "#005BBB";
     } else if (speedFloat > 5) {
       slapsfx1.play();
       score.style.fontSize = "30px";
-      score.style.color = "#30AFFF";
+      score.style.color = "#005BBB";
     } else {
       face.graphics.face = faceAssets[`slap${direction}Blur0`];
       slapsfx0.play();
       score.style.fontSize = "20px";
-      score.style.color = "#30AFFF";
+      score.style.color = "#005BBB";
     }
     setTimeout(function () {
       resetGame();

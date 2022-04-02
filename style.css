@@ -84,8 +84,16 @@ body {
   font-size: 1.2rem;
 }
 
-#socials ul{
+ul {
   list-style: none;
+}
+
+
+
+.important-link {
+  border-radius: 5px;
+  background-color: #ffd500;
+  padding: 2px;
 }
 
 #socials {
@@ -105,9 +113,13 @@ body {
   left: 0;
   top: 0;
   padding: 20px;
-  color: blue;
+  color: #005BBB;
   height: 1.5rem;
   text-decoration: underline;
+}
+
+a{
+  color: #005BBB;
 }
 
 #donation {
