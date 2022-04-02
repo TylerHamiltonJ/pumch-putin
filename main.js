@@ -329,6 +329,14 @@ function draw() {
       Math.pow(face.velocity_y, 2) + Math.pow(face.velocity_x, 2)
     );
     const speedFloat = (W < 900 ? velocity * 1.1 : velocity * 0.4) * 1.728;
+
+    let totalHits = parseInt(localStorage.getItem("totalHits")) || 0;
+    let maxSpeed = parseInt(localStorage.getItem("maxSpeed")) || 0;
+    let record = speedFloat > maxSpeed ? speedFloat : maxSpeed;
+
+    totalHits += 1;
+    localStorage.setItem("totalHits", totalHits);
+    localStorage.setItem("maxSpeed", record);
     const speed = metric
       ? Math.floor(speedFloat)
       : Math.floor(speedFloat / 1.609);
@@ -351,8 +359,7 @@ function draw() {
     face.graphics.face = faceAssets[`slap${direction}Blur1`];
     let socials = document.getElementById("socials");
     if (speedFloat >= 50) {
-      
-    face.graphics.face = faceAssets[`slap${direction}Blur3`];
+      face.graphics.face = faceAssets[`slap${direction}Blur3`];
       socials.style.fontSize = "1.2rem";
       slapsfx5.play();
       jiggy.play();
