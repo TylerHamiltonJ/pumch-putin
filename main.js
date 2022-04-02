@@ -65,6 +65,7 @@ function Hand() {
   this.drag = false;
   this.v_speed_x = 0;
   this.isFish = false;
+  this.angle = 0;
   const getHandImg = () => {
     if (startScreen === 1) {
       return handstart;
@@ -90,11 +91,7 @@ function Hand() {
   };
 
   this.startDrag = function () {
-    if (this.isFish) {
-      this.img = fishHandMove;
-    } else {
-      this.img = handimg;
-    }
+    this.img = this.startImg;
     this.drag = true;
     this.mousex = mouseX;
     this.mousey = mouseY;
@@ -126,10 +123,20 @@ function Hand() {
         this.v_speed = this.v_speed * 0.5;
       }
     }
+
+    this.angle = this.v_speed_x;
+    console.log(this.v_speed_x);
   };
 
   this.show = function () {
-    image(this.img, this.xpos, this.ypos, this.width, this.height);
+    rotate_and_draw_image(
+      this.img,
+      this.xpos,
+      this.ypos,
+      this.width,
+      this.height,
+      this.angle
+    );
     noFill();
     noStroke();
     rect(this.xpos, this.ypos, 100, 100);
@@ -214,12 +221,11 @@ function preload() {
     slapRightBlur3: loadImage("assets/putin_slap_r_blr3.png"),
   };
   // Hands
-  handstart = loadImage("assets/hand2.png");
+  handstart = loadImage("assets/fist2.png");
   rarehand1 = loadImage("assets/rarehand1.png");
   rarehand2 = loadImage("assets/rarehand2.png");
   fishHand = loadImage("assets/fish.png");
   fishHandMove = loadImage("assets/fish2.png");
-  handimg = loadImage("assets/hand3.png");
 }
 
 function setup() {
@@ -274,6 +280,23 @@ function resetGame() {
   score.innerHTML = `0${metric ? "km/h" : "mph"}`;
 }
 
+function rotate_and_draw_image(
+  imgURL,
+  img_x,
+  img_y,
+  img_width,
+  img_height,
+  img_angle
+) {
+  imageMode(CENTER);
+  translate(img_x + img_width / 2, img_y + img_width / 2);
+  rotate((PI / 180) * img_angle);
+  image(imgURL, 0, 0, img_width, img_height);
+  rotate((-PI / 180) * img_angle);
+  translate(-(img_x + img_width / 2), -(img_y + img_width / 2));
+  imageMode(CORNER);
+}
+
 function draw() {
   try {
     checkMutations();
@@ -305,7 +328,7 @@ function draw() {
     const velocity = Math.sqrt(
       Math.pow(face.velocity_y, 2) + Math.pow(face.velocity_x, 2)
     );
-    const speedFloat = (W < 900 ? velocity * 1.1 : velocity * 0.4) * 1.08;
+    const speedFloat = (W < 900 ? velocity * 1.1 : velocity * 0.4) * 1.728;
     const speed = metric
       ? Math.floor(speedFloat)
       : Math.floor(speedFloat / 1.609);
@@ -323,31 +346,27 @@ function draw() {
     if (hand.isFish) {
       slapsfxfish.play();
     }
-    let blurSegments = [
-      { speed: 30, val: 3 },
-      { speed: 20, val: 2 },
-      { speed: 10, val: 0 },
-      { speed: 0, val: 0 },
-    ];
     let direction = (face.graphics.face =
       hand.v_speed_x < 0 ? "Left" : "Right");
     face.graphics.face = faceAssets[`slap${direction}Blur1`];
     let socials = document.getElementById("socials");
-    if (speedFloat >= 30) {
+    if (speedFloat >= 50) {
+      
+    face.graphics.face = faceAssets[`slap${direction}Blur3`];
       socials.style.fontSize = "1.2rem";
       slapsfx5.play();
       jiggy.play();
       score.style.fontSize = "80px";
       score.style.color = "#22e51d";
-    } else if (speedFloat > 25) {
+    } else if (speedFloat > 40) {
       slapsfx4.play();
       score.style.fontSize = "70px";
       score.style.color = "#30AFFF";
-    } else if (speedFloat > 20) {
+    } else if (speedFloat > 30) {
       slapsfx3.play();
       score.style.fontSize = "60px";
       score.style.color = "#30AFFF";
-    } else if (speedFloat > 15) {
+    } else if (speedFloat > 20) {
       slapsfx2.play();
       score.style.fontSize = "50px";
       score.style.color = "#30AFFF";
