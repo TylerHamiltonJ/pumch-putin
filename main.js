@@ -125,7 +125,6 @@ function Hand() {
     }
 
     this.angle = this.v_speed_x;
-    console.log(this.v_speed_x);
   };
 
   this.show = function () {
