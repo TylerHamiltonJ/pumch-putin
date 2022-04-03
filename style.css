@@ -143,10 +143,6 @@ a {
   transition-duration: 1s;
 }
 
-#r89-mobile-sticky-footer-1-wrapper {
-  max-height: 150px;
-}
-
 .banner-content {
   width: auto;
   margin: 0 auto;
@@ -190,7 +186,10 @@ span.fake-link {
 
 @media screen and (max-width: 500px) {
   #socials,
-  #donation,
+  #donation {
+    /* We keep the font size at 0 to hide it from the start screen */
+    font-size: 0rem;
+  }
   #units,
   #info-banner {
     font-size: 1.05rem;

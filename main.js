@@ -156,12 +156,20 @@ let H = container.getBoundingClientRect().height;
 let secretCounter = 0;
 let faceAssets = {};
 
+function removeStartScreen() {
+  let socials = document.getElementById("socials");
+  let donation = document.getElementById("donation");
+  socials.style.fontSize = "1.05rem";
+  donation.style.fontSize = "1.05rem";
+  startScreen = 0;
+  // if (isAprilFools) {
+  //   document.getElementById("april-fools").classList.toggle("banner-drop-in");
+  // }
+}
+
 function mousePressed() {
   if (startScreen === 1) {
-    startScreen = 0;
-    // if (isAprilFools) {
-    //   document.getElementById("april-fools").classList.toggle("banner-drop-in");
-    // }
+    removeStartScreen();
   }
 
   if (hand.onBall(mouseX, mouseY)) hand.startDrag();
@@ -169,13 +177,10 @@ function mousePressed() {
 
 function touchStarted() {
   if (startScreen === 1) {
-    // if (isAprilFools) {
-    //   document.getElementById("april-fools").classList.toggle("banner-drop-in");
-    // }
+    removeStartScreen();
     window.navigator.getUserMedia = (...args) =>
       window.navigator.mediaDevices.getUserMedia(...args);
     userStartAudio();
-    startScreen = 0;
   }
   userStartAudio();
   if (hand.onBall(mouseX, mouseY)) hand.startDrag();
@@ -238,6 +243,7 @@ function setup() {
   const speedUnits = metric ? "km/h" : "mph";
   let twitter = document.getElementById("twitter");
   let facebook = document.getElementById("facebook");
+
   let speed = 0;
   twitter.href = `https://twitter.com/intent/tweet?url=https%3A%2F%2Fpunch-putin.com&text=I%20punched%20Putin%20${speed}${speedUnits}%21&hashtags=PunchPutin`;
   facebook.href = `http://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpunch-putin.com&quote=I%20punched%20Putin%20${speed}${speedUnits}%21`;
@@ -311,6 +317,10 @@ function draw() {
   hand.show();
   face.show();
   if (startScreen === 1) {
+    let socials = document.getElementById("socials");
+    let donation = document.getElementById("donation");
+    socials.style.fontSize = "0rem";
+    donation.style.fontSize = "0rem";
     initScreen();
   }
   if (
