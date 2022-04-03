@@ -80,15 +80,13 @@ body {
 #socials,
 #donation,
 #units,
-#april-fools {
+#info-banner {
   font-size: 1.2rem;
 }
 
 ul {
   list-style: none;
 }
-
-
 
 .important-link {
   border-radius: 5px;
@@ -113,13 +111,13 @@ ul {
   left: 0;
   top: 0;
   padding: 20px;
-  color: #005BBB;
+  color: #005bbb;
   height: 1.5rem;
   text-decoration: underline;
 }
 
-a{
-  color: #005BBB;
+a {
+  color: #005bbb;
 }
 
 #donation {
@@ -132,10 +130,10 @@ a{
   transition: 0.3s;
 }
 
-#april-fools {
+#info-banner {
   top: -50px;
   opacity: 0;
-  width: 100%;
+  /* width: 100%; */
   text-align: center;
   color: #fff;
   background-color: #28b9ab;
@@ -143,6 +141,10 @@ a{
   padding: 10px;
   position: relative;
   transition-duration: 1s;
+}
+
+#r89-mobile-sticky-footer-1-wrapper {
+  max-height: 150px;
 }
 
 .banner-content {
@@ -190,7 +192,7 @@ span.fake-link {
   #socials,
   #donation,
   #units,
-  #april-fools {
+  #info-banner {
     font-size: 1.05rem;
   }
   #container {
